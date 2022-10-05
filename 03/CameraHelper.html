@@ -36,15 +36,18 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
 
         // 카메라 설정
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-        camera.position.set(3, 3, 3);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 5);
         scene.add(camera);
+        
+        const helper = new THREE.CameraHelper( camera );
+        scene.add( helper );
 
         // 메쉬 설정
         const geometry = new THREE.BoxGeometry(1, 2, 1);
         const material = new THREE.MeshLambertMaterial({ color: 'red' });
         const mesh = new THREE.Mesh(geometry, material);
-        mesh.rotation.set(0, 0, 0);
+        mesh.rotation.set(1, 0, 0);
         scene.add(mesh);
         camera.lookAt(mesh.position)
 
@@ -57,10 +60,6 @@
         const light2 = new THREE.DirectionalLight(0xffffff, .5);
         light2.position.set(-5, -5, 5);
         scene.add(light2);
-
-        //헬퍼
-        const axesHelper = new THREE.AxesHelper(3);
-        scene.add(axesHelper);
 
         //애니메이션 설정
         function animate() {
