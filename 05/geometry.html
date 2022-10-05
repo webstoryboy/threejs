@@ -48,18 +48,11 @@
         mesh.rotation.set(15, 15, 0);
         scene.add(mesh);
 
-        // dat.gui : 속성, 속성값, 최저 범위, 최고 범위 스텝
+        // dat.gui 
         const gui = new dat.GUI();
-        gui.add(mesh.rotation, 'x', -5, 10, 0.1); 
-        gui.add(mesh.rotation, 'y', -5, 10, 0.1); 
-        gui
-            .add(mesh.rotation, 'z')
-            .min(-5)
-            .max(10)
-            .step(0.01)
-            .name("회전");
         gui.add(camera.position, 'x', -10, 10, 0.1).name("카메라 위치X");
         gui.add(camera.position, 'y', -10, 10, 0.1).name("카메라 위치Y");
+        gui.add(camera.position, 'z', -10, 10, 0.1).name("카메라 위치Z");
 
         
         //조명 설정
@@ -74,8 +67,6 @@
         //애니메이션 설정
         function animate() {
             requestAnimationFrame(animate);
-
-            // camera.lookAt(mesh.position);
 
             mesh.rotation.x += .002;
             mesh.rotation.y += .002;

@@ -10,6 +10,7 @@ https://webstoryboy.github.io/threejs/03/axesHelper.html
 
 https://webstoryboy.github.io/threejs/04/fps.html
 https://webstoryboy.github.io/threejs/04/gui.html
+https://webstoryboy.github.io/threejs/04/OrbitControls.html
 
 
 
