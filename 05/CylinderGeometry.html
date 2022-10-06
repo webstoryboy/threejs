@@ -24,8 +24,8 @@
 
 <body>
     <canvas id="canvas"></canvas>
-    <script src="../three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script>
         // 화면 설정
         const scene = new THREE.Scene();
@@ -37,24 +37,19 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
 
         // 카메라 설정
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-        camera.position.set(0, 0, 3);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 1000);
+        camera.position.set(0, 0, 23);
         scene.add(camera);
 
         // 메쉬 설정
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshLambertMaterial({ color: 'red' });
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.rotation.set(15, 15, 0);
-        scene.add(mesh);
+        const geometry = new THREE.CylinderGeometry( 3, 3, 10, 42 );
+        const material = new THREE.MeshLambertMaterial( {color: 0xff0000, wireframe: true} );
+        const cylinder = new THREE.Mesh( geometry, material );
+        scene.add( cylinder );
 
-        // dat.gui 
-        const gui = new dat.GUI();
-        gui.add(camera.position, 'x', -10, 10, 0.1).name("카메라 위치X");
-        gui.add(camera.position, 'y', -10, 10, 0.1).name("카메라 위치Y");
-        gui.add(camera.position, 'z', -10, 10, 0.1).name("카메라 위치Z");
-
-        
+        // OrbitControls
+        const orbitControls = new THREE.OrbitControls(camera, renderer.domElement);        
+       
         //조명 설정
         const light = new THREE.DirectionalLight(0xffffff, 1.5);
         light.position.y = 10;
@@ -68,9 +63,11 @@
         function animate() {
             requestAnimationFrame(animate);
 
-            mesh.rotation.x += .002;
-            mesh.rotation.y += .002;
-            mesh.rotation.z += .004;
+            orbitControls.update();
+
+            cylinder.rotation.x += .002;
+            cylinder.rotation.y += .002;
+            cylinder.rotation.z += .004;
 
             renderer.render(scene, camera);
         }
