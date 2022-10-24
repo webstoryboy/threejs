@@ -24,7 +24,6 @@
 
 <body>
     <canvas id="canvas"></canvas>
-    <!-- <script src="../three.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script>
@@ -38,16 +37,19 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
 
         // 카메라 설정
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, .1, 1000);
-        camera.position.set(0, 0, 13);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 3);
         scene.add(camera);
 
         // 메쉬 설정
-        const geometry = new THREE.CircleGeometry( 5, 50 );
-        const material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
-        const circle = new THREE.Mesh( geometry, material );
-        scene.add( circle );
-
+        const geometry = new THREE.BoxGeometry(1, 1, 1, 4, 4, 4);
+        const material = new THREE.MeshLambertMaterial({ 
+            color: 0xff0000,
+            wireframe: true,
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.rotation.set(15, 15, 0);
+        scene.add(mesh);
 
         // OrbitControls
         const orbitControls = new THREE.OrbitControls(camera, renderer.domElement);        
@@ -67,9 +69,9 @@
 
             orbitControls.update();
 
-            circle.rotation.x += .002;
-            circle.rotation.y += .002;
-            circle.rotation.z += .004;
+            mesh.rotation.x += .002;
+            mesh.rotation.y += .002;
+            mesh.rotation.z += .004;
 
             renderer.render(scene, camera);
         }

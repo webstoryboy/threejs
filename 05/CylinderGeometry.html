@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CylinderGeometry</title>
     <style>
         body {
             margin: 0;
@@ -47,6 +47,26 @@
         const cylinder = new THREE.Mesh( geometry, material );
         scene.add( cylinder );
 
+        const geometry2 = new THREE.CylinderGeometry( 3, 3, 10, 42 );
+        const material2 = new THREE.MeshLambertMaterial( {color: 0xff0000, wireframe: false} );
+        const cylinder2 = new THREE.Mesh( geometry2, material2 );
+        cylinder2.position.set(15, 0, 0)
+        scene.add( cylinder2 );
+
+        const radiusTop = 4;                    // ui: radiusTop
+        const radiusBottom = 4;                 // ui: radiusBottom
+        const height = 8;                       // ui: height
+        const radialSegments = 12;              // ui: radialSegments
+        const heightSegments = 2;               // ui: heightSegments
+        const openEnded = false;                // ui: openEnded
+        const thetaStart = Math.PI * 0.25;      // ui: thetaStart
+        const thetaLength = Math.PI * 1.5;      // ui: thetaLength
+        const geometry3 = new THREE.CylinderGeometry( radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength );
+        const material3 = new THREE.MeshLambertMaterial( {color: 0xff0000, wireframe: false, side: THREE.DoubleSide} );
+        const cylinder3 = new THREE.Mesh( geometry3, material3 );
+        cylinder3.position.set(-15, 0, 0)
+        scene.add( cylinder3 );
+
         // OrbitControls
         const orbitControls = new THREE.OrbitControls(camera, renderer.domElement);        
        
@@ -59,6 +79,10 @@
         light2.position.set(-10, -10, 10);
         scene.add(light2);
 
+        const light3 = new THREE.DirectionalLight(0xffffff, .5);
+        light3.position.set(10, 10, 10);
+        scene.add(light3);
+
         //애니메이션 설정
         function animate() {
             requestAnimationFrame(animate);
@@ -68,6 +92,14 @@
             cylinder.rotation.x += .002;
             cylinder.rotation.y += .002;
             cylinder.rotation.z += .004;
+
+            cylinder2.rotation.x += .002;
+            cylinder2.rotation.y += .002;
+            cylinder2.rotation.z += .004;
+
+            cylinder3.rotation.x += .002;
+            cylinder3.rotation.y += .002;
+            cylinder3.rotation.z += .004;
 
             renderer.render(scene, camera);
         }

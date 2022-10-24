@@ -14,6 +14,9 @@ https://webstoryboy.github.io/threejs/04/OrbitControls.html
 
 https://webstoryboy.github.io/threejs/05/BoxGeometry.html   
 https://webstoryboy.github.io/threejs/05/CircleGeometry.html   
+https://webstoryboy.github.io/threejs/05/ConeGeometry.html   
+https://webstoryboy.github.io/threejs/05/CylinderGeometry.html   
+https://webstoryboy.github.io/threejs/05/Geometry01.html   
 
 
 
